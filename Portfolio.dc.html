@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#08080f; color:#e9e9f2; font-family:'Space Grotesk',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#a78bfa; text-decoration:none; }
+  a:hover { color:#c4b5fd; }
+  ::selection { background:rgba(139,92,246,.35); }
+  *:focus-visible { outline:2px solid #8b5cf6; outline-offset:2px; border-radius:6px; }
+  @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+  @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#08080f;overflow:hidden;position:relative">
+
+  <div style="position:absolute;top:-260px;left:-160px;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(109,64,224,.34),transparent 68%);filter:blur(20px);pointer-events:none"></div>
+  <div style="position:absolute;top:180px;right:-260px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.26),transparent 68%);filter:blur(20px);pointer-events:none"></div>
+
+  <div style="position:relative;max-width:1180px;margin:0 auto;padding:0 24px">
+
+    <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:15px;letter-spacing:-.01em">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-size:14px">&lt;/&gt;</span>
+        <span style="color:#e9e9f2">dev.py</span>
+      </div>
+      <nav style="display:flex;gap:26px;font-size:14px;color:#9797ae;flex-wrap:wrap">
+        <a href="#services" style="color:#9797ae" style-hover="color:#e9e9f2">{{ t.navServices }}</a>
+        <a href="#process" style="color:#9797ae" style-hover="color:#e9e9f2">{{ t.navProcess }}</a>
+        <a href="#stack" style="color:#9797ae" style-hover="color:#e9e9f2">{{ t.navStack }}</a>
+        <a href="#contact" style="color:#9797ae" style-hover="color:#e9e9f2">{{ t.navContact }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="display:flex;padding:3px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-family:'JetBrains Mono',monospace;font-size:12.5px">
+          <button type="button" onClick="{{ setUk }}" style="{{ ukBtnStyle }}">UA</button>
+          <button type="button" onClick="{{ setEn }}" style="{{ enBtnStyle }}">EN</button>
+        </div>
+        <a href="{{ telegramUrl }}" target="_blank" rel="noopener" style="padding:10px 20px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#e9e9f2;font-size:14px;font-weight:500;white-space:nowrap" style-hover="background:rgba(139,92,246,.16);border-color:rgba(139,92,246,.5);color:#fff">{{ t.writeTg }}</a>
+      </div>
+    </header>
+
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:56px;align-items:center;padding:64px 0 96px">
+      <div style="min-width:0">
+        <div style="display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;border:1px solid rgba(139,92,246,.32);background:rgba(139,92,246,.1);font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#c4b5fd;margin-bottom:26px">
+          <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80"></span>
+          {{ t.available }}
+        </div>
+        <h1 style="margin:0 0 22px;font-size:clamp(38px,5.4vw,62px);line-height:1.04;font-weight:700;letter-spacing:-.035em;text-wrap:balance">
+          {{ t.heroA }} <span style="background:linear-gradient(100deg,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent">{{ t.heroAccent }}</span> {{ t.heroB }}
+        </h1>
+        <p style="margin:0 0 34px;max-width:520px;font-size:18px;line-height:1.6;color:#9a9ab2;text-wrap:pretty">{{ t.heroSub }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px">
+          <a href="#contact" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:999px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-size:15.5px;font-weight:600;white-space:nowrap;box-shadow:0 12px 34px rgba(109,64,224,.42)" style-hover="filter:brightness(1.12);box-shadow:0 16px 40px rgba(109,64,224,.55)">{{ t.ctaDiscuss }}</a>
+          <a href="https://t.me/py_rom" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);color:#e9e9f2;font-size:15.5px;font-weight:500" style-hover="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28)">{{ t.writeTg }}</a>
+        </div>
+        <div style="display:flex;gap:40px;flex-wrap:wrap">
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;color:#fff">30+</div><div style="font-size:13.5px;color:#7d7d94;margin-top:4px">{{ t.stat1 }}</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;color:#fff">{{ t.stat2n }}</div><div style="font-size:13.5px;color:#7d7d94;margin-top:4px">{{ t.stat2 }}</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:600;color:#fff">{{ t.stat3n }}</div><div style="font-size:13.5px;color:#7d7d94;margin-top:4px">{{ t.stat3 }}</div></div>
+        </div>
+      </div>
+
+      <sc-if value="{{ showTerminal }}" hint-placeholder-val="{{ true }}">
+      <div style="min-width:0;display:grid;gap:18px">
+        <div style="border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,#12121d,#0c0c15);box-shadow:0 26px 60px rgba(0,0,0,.55);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)">
+            <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+            <span style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#6f6f88">bot/handlers.py</span>
+          </div>
+          <pre style="margin:0;padding:20px 18px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.85;color:#c9c9dd;overflow-x:auto"><span style="color:#c084fc">from</span> aiogram <span style="color:#c084fc">import</span> Router
+<span style="color:#c084fc">from</span> aiogram.filters <span style="color:#c084fc">import</span> CommandStart
+<span style="color:#c084fc">from</span> aiogram.types <span style="color:#c084fc">import</span> Message
+
+router = Router()
+
+<span style="color:#60a5fa">@router.message</span>(<span style="color:#fbbf24">CommandStart</span>())
+<span style="color:#c084fc">async def</span> <span style="color:#fbbf24">start</span>(msg: Message):
+    <span style="color:#c084fc">await</span> msg.answer(
+        <span style="color:#86efac">{{ t.codeLine }}</span>,
+        reply_markup=main_menu(),
+    )<span style="display:inline-block;width:8px;height:15px;background:#a78bfa;vertical-align:-2px;margin-left:2px;animation:blink 1.1s step-end infinite"></span></pre>
+        </div>
+
+        <div style="justify-self:end;width:min(100%,320px);border-radius:16px;border:1px solid rgba(96,165,250,.24);background:rgba(18,18,29,.9);padding:14px;display:grid;gap:10px;animation:floaty 6s ease-in-out infinite">
+          <div style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:#7d7d94;font-family:'JetBrains Mono',monospace">
+            <span style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);display:inline-block"></span>
+            @shop_assistant_bot
+          </div>
+          <div style="align-self:start;max-width:82%;padding:10px 14px;border-radius:14px 14px 14px 4px;background:rgba(255,255,255,.07);font-size:13.5px;color:#dcdce8">{{ t.chat1 }}</div>
+          <div style="justify-self:end;max-width:82%;padding:10px 14px;border-radius:14px 14px 4px 14px;background:linear-gradient(135deg,#7c3aed,#2563eb);font-size:13.5px;color:#fff">{{ t.chat2 }}</div>
+        </div>
+      </div>
+      </sc-if>
+    </section>
+
+    <section id="services" style="padding:40px 0 96px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8b5cf6;margin-bottom:14px">{{ t.kickerServices }}</div>
+      <h2 style="margin:0 0 44px;font-size:clamp(28px,3.6vw,40px);line-height:1.2;font-weight:700;letter-spacing:-.03em">{{ t.servicesTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+          <div style="padding:28px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease" style-hover="transform:translateY(-6px);border-color:rgba(139,92,246,.45);box-shadow:0 18px 44px rgba(109,64,224,.22)">
+            <div style="width:44px;height:44px;border-radius:13px;background:rgba(139,92,246,.16);border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px">{{ s.icon }}</div>
+            <h3 style="margin:0 0 10px;font-size:19px;font-weight:600;letter-spacing:-.02em">{{ s.title }}</h3>
+            <p style="margin: 0 0 16px; font-size: 14.5px; line-height: 1.65; color: #9393ab">{{ s.text }}</p>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6f6f88">{{ s.meta }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section id="process" style="padding:40px 0 96px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8b5cf6;margin-bottom:14px">{{ t.kickerProcess }}</div>
+      <h2 style="margin:0 0 44px;font-size:clamp(28px,3.6vw,40px);line-height:1.2;font-weight:700;letter-spacing:-.03em">{{ t.processTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+          <div style="position:relative;padding:24px 20px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);transition:border-color .25s ease,background .25s ease" style-hover="border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.06)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#a78bfa;margin-bottom:14px">{{ s.n }}</div>
+            <div style="height:2px;background:linear-gradient(90deg,#7c3aed,rgba(37,99,235,.15));border-radius:2px;margin-bottom:16px"></div>
+            <h3 style="margin:0 0 8px;font-size:16.5px;font-weight:600">{{ s.title }}</h3>
+            <p style="margin:0;font-size:13.5px;line-height:1.6;color:#8e8ea6">{{ s.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section id="stack" style="padding:40px 0 96px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8b5cf6;margin-bottom:14px">{{ t.kickerStack }}</div>
+      <h2 style="margin:0 0 32px;font-size:clamp(28px,3.6vw,40px);line-height:1.2;font-weight:700;letter-spacing:-.03em">{{ t.stackTitle }}</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <sc-for list="{{ stack }}" as="tech" hint-placeholder-count="14">
+          <span style="font-family: 'JetBrains Mono',monospace; font-size: 14px; padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.035); color: #c6c6d8; line-height: 1.2; white-space: nowrap; transition: all .2s ease; position: static" style-hover="border-color:rgba(139,92,246,.5);color:#fff;background:rgba(139,92,246,.14)">{{ tech }}</span>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:40px 0 96px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8b5cf6;margin-bottom:14px">{{ t.kickerReviews }}</div>
+      <h2 style="margin:0 0 44px;font-size:clamp(28px,3.6vw,40px);line-height:1.2;font-weight:700;letter-spacing:-.03em">{{ t.reviewsTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+          <figure style="margin:0;padding:28px;border-radius:18px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));transition:transform .25s ease,border-color .25s ease" style-hover="transform:translateY(-5px);border-color:rgba(139,92,246,.4)">
+            <div style="font-size:34px;line-height:1;color:#7c3aed;margin-bottom:14px">“</div>
+            <blockquote style="margin:0 0 20px;font-size:15.5px;line-height:1.7;color:#d3d3e2">{{ r.text }}</blockquote>
+            <figcaption style="display:flex;align-items:center;gap:12px">
+              <span style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#2563eb);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#fff">{{ r.initial }}</span>
+              <span>
+                <span style="display:block;font-size:14.5px;font-weight:600">{{ r.name }}</span>
+                <span style="display:block;font-size:13px;color:#7d7d94">{{ r.role }}</span>
+              </span>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+
+    <section id="contact" style="padding:40px 0 110px">
+      <div style="border-radius:24px;border:1px solid rgba(139,92,246,.28);background:linear-gradient(140deg,rgba(124,58,237,.18),rgba(37,99,235,.1) 55%,rgba(255,255,255,.02));padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px">
+        <div style="min-width:0">
+          <h2 style="margin:0 0 16px;font-size:clamp(28px,3.6vw,42px);line-height:1.2;font-weight:700;letter-spacing:-.03em;text-wrap:balance">{{ t.contactTitle }}</h2>
+          <p style="margin:0 0 28px;font-size:16.5px;line-height:1.65;color:#a3a3ba;max-width:440px">{{ t.contactSub }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px">
+            <a href="{{ telegramUrl }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-weight:600;font-size:15px;box-shadow:0 12px 32px rgba(109,64,224,.4)" style-hover="filter:brightness(1.12)">Telegram {{ telegram }}</a>
+            <a href="{{ mailtoUrl }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#e9e9f2;font-weight:500;font-size:15px" style-hover="background:rgba(255,255,255,.07)">{{ email }}</a>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#7d7d94;line-height:1.9">
+            <div>{{ t.status }}</div>
+            <div>{{ t.timezone }}</div>
+          </div>
+        </div>
+
+        <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="min-width:0;display:grid;gap:14px;align-content:start;padding:26px;border-radius:18px;background:rgba(8,8,15,.55);border:1px solid rgba(255,255,255,.1)">
+          <label style="display:grid;gap:7px;font-size:13.5px;color:#9a9ab2">{{ t.fName }}
+            <input name="name" placeholder="{{ t.fNameP }}" style="padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:#e9e9f2;font-family:'Space Grotesk',sans-serif;font-size:14.5px" style-focus="border-color:#8b5cf6;outline:none">
+          </label>
+          <label style="display:grid;gap:7px;font-size:13.5px;color:#9a9ab2">{{ t.fContact }}
+            <input name="contact" placeholder="@username" style="padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:#e9e9f2;font-family:'Space Grotesk',sans-serif;font-size:14.5px" style-focus="border-color:#8b5cf6;outline:none">
+          </label>
+          <label style="display:grid;gap:7px;font-size:13.5px;color:#9a9ab2">{{ t.fTask }}
+            <textarea name="task" rows="4" placeholder="{{ t.fTaskP }}" style="padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:#e9e9f2;font-family:'Space Grotesk',sans-serif;font-size:14.5px;resize:vertical" style-focus="border-color:#8b5cf6;outline:none"></textarea>
+          </label>
+          <button type="submit" style="margin-top:4px;padding:15px 24px;border-radius:999px;border:none;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;cursor:pointer" style-hover="filter:brightness(1.12)">{{ submitLabel }}</button>
+          <div style="font-size:12.5px;color:#6f6f88;text-align:center">{{ t.consent }}</div>
+        </form>
+        </sc-if>
+      </div>
+    </section>
+
+    <footer style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:28px 0 40px;border-top:1px solid rgba(255,255,255,.07);font-size:13.5px;color:#6f6f88">
+      <span>{{ t.footer }}</span>
+      <span style="font-family:'JetBrains Mono',monospace">built with python + coffee</span>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;uk&quot;,&quot;en&quot;],&quot;default&quot;:&quot;uk&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;telegram&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@py_rom&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;bronx1807@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showTerminal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showForm&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const I18N = {
+  uk: {
+    navServices: 'Послуги', navProcess: 'Процес', navStack: 'Стек', navContact: 'Контакти',
+    writeTg: 'Написати в Telegram',
+    available: 'Вільний для нових проєктів',
+    heroA: 'Розробка сайтів і', heroAccent: 'Telegram-ботів', heroB: 'на Python',
+    heroSub: 'Боти, backend і сайти на Python. Від брифу до продакшену — один виконавець.',
+    ctaDiscuss: 'Обговорити проєкт →',
+    stat1: 'проєктів здано', stat2n: '2 роки', stat2: 'комерційної розробки', stat3n: 'від 5 днів', stat3: 'до першого релізу',
+    codeLine: '"Каталог, оплата, доставка — усе в одному боті 🚀"',
+    chat1: 'Замовлення №1284 оплачено — 4 890 UAH', chat2: 'Надіслати ТТН клієнту',
+    kickerServices: '// послуги', servicesTitle: 'Що я роблю',
+    kickerProcess: '// процес', processTitle: 'Як іде робота',
+    kickerStack: '// стек', stackTitle: 'Технології',
+    kickerReviews: '// відгуки', reviewsTitle: 'Що кажуть клієнти',
+    contactTitle: 'Розкажіть про задачу — відповім протягом години',
+    contactSub: 'Безкоштовно оціню строки та бюджет.',
+    status: 'status: відкритий до проєктів', timezone: 'timezone: UTC+3 · віддалено',
+    fName: 'Імʼя', fNameP: 'Як до вас звертатися', fContact: 'Telegram або пошта', fTask: 'Задача',
+    fTaskP: 'Бот для магазину з оплатою та адмінкою',
+    submit: 'Надіслати заявку', sentLabel: 'Заявку надіслано ✓',
+    consent: 'Натискаючи, ви погоджуєтесь на обробку даних',
+    footer: '© 2026 · Python-розробка сайтів і Telegram-ботів',
+    services: [
+      { icon: '✈', title: 'Telegram-боти', text: 'Магазини, CRM, заявки, розсилки. aiogram 3.', meta: '7–14 днів' },
+      { icon: '◱', title: 'Сайти та лендинги', text: 'Адаптивні лендинги й сайти на Django.', meta: '10–20 днів' },
+      { icon: '⇄', title: 'Backend і API', text: 'REST на FastAPI, інтеграції, OpenAPI.', meta: 'за обсягом' },
+      { icon: '⚙', title: 'Автоматизація', text: 'Парсери, звіти, синхронізація, сповіщення.', meta: '3–10 днів' },
+    ],
+    steps: [
+      { n: '01', title: 'Бриф', text: 'Дзвінок 20–30 хвилин.' },
+      { n: '02', title: 'План робіт', text: 'Обсяг і строки за етапами.' },
+      { n: '03', title: 'Прототип', text: 'Сценарії бота або макет сторінок.' },
+      { n: '04', title: 'Розробка', text: 'Ітерації по 3–5 днів + демо-стенд.' },
+      { n: '05', title: 'Запуск і підтримка', text: 'Docker, моніторинг, місяць правок.' },
+    ],
+    reviews: [
+      { text: 'Бот замінив менеджера на замовленнях. Два тижні — і працює.', name: 'Марина К.', role: 'власниця шоуруму', initial: 'М' },
+      { text: 'Спростив половину ТЗ і зекономив нам бюджет.', name: 'Артем Л.', role: 'COO, дистрибуція запчастин', initial: 'А' },
+      { text: 'API витримало чорну пʼятницю без падінь.', name: 'Дмитро С.', role: 'CTO маркетплейсу', initial: 'Д' },
+    ],
+  },
+  en: {
+    navServices: 'Services', navProcess: 'Process', navStack: 'Stack', navContact: 'Contact',
+    writeTg: 'Message on Telegram',
+    available: 'Available for new projects',
+    heroA: 'Websites and', heroAccent: 'Telegram bots', heroB: 'built with Python',
+    heroSub: 'Bots, backends and sites in Python. Brief to production — one developer.',
+    ctaDiscuss: 'Discuss a project →',
+    stat1: 'projects delivered', stat2n: '2 years', stat2: 'of commercial work', stat3n: 'from 5 days', stat3: 'to first release',
+    codeLine: '"Catalog, payment, delivery — all in one bot 🚀"',
+    chat1: 'Order #1284 paid — 4,890 UAH', chat2: 'Send tracking to customer',
+    kickerServices: '// services', servicesTitle: 'What I do',
+    kickerProcess: '// process', processTitle: 'How we work',
+    kickerStack: '// stack', stackTitle: 'Technologies',
+    kickerReviews: '// reviews', reviewsTitle: 'What clients say',
+    contactTitle: 'Tell me about your task — I reply within an hour',
+    contactSub: 'Free estimate of timeline and budget.',
+    status: 'status: open to projects', timezone: 'timezone: UTC+3 · remote',
+    fName: 'Name', fNameP: 'How should I call you', fContact: 'Telegram or email', fTask: 'Task',
+    fTaskP: 'A shop bot with payments and an admin panel',
+    submit: 'Send request', sentLabel: 'Request sent ✓',
+    consent: 'By submitting you agree to data processing',
+    footer: '© 2026 · Python development: websites and Telegram bots',
+    services: [
+      { icon: '✈', title: 'Telegram bots', text: 'Shops, CRM, leads, broadcasts. aiogram 3.', meta: '7–14 days' },
+      { icon: '◱', title: 'Websites & landings', text: 'Responsive landings and Django sites.', meta: '10–20 days' },
+      { icon: '⇄', title: 'Backend & API', text: 'FastAPI REST, integrations, OpenAPI.', meta: 'scope-based' },
+      { icon: '⚙', title: 'Automation', text: 'Scrapers, reports, sync, notifications.', meta: '3–10 days' },
+    ],
+    steps: [
+      { n: '01', title: 'Brief', text: 'A 20–30 minute call.' },
+      { n: '02', title: 'Plan', text: 'Scope and timeline per stage.' },
+      { n: '03', title: 'Prototype', text: 'Bot scenarios or page mockups.' },
+      { n: '04', title: 'Development', text: 'Iterations every 3–5 days + demo.' },
+      { n: '05', title: 'Launch & support', text: 'Docker deploy, monitoring, a month of fixes.' },
+    ],
+    reviews: [
+      { text: 'The bot replaced a manager on orders. Live in two weeks.', name: 'Maryna K.', role: 'showroom owner', initial: 'M' },
+      { text: 'Cut half the spec and saved us real budget.', name: 'Artem L.', role: 'COO, auto parts distribution', initial: 'A' },
+      { text: 'The API survived Black Friday with zero downtime.', name: 'Dmytro S.', role: 'CTO, marketplace', initial: 'D' },
+    ],
+  },
+};
+
+class Component extends DCLogic {
+  state = { sent: false, lang: null };
+  componentDidMount() {
+    let saved = null;
+    try { saved = localStorage.getItem('pf-lang'); } catch (e) {}
+    if (saved === 'en' || saved === 'uk') this.setState({ lang: saved });
+  }
+  setLang(lang) {
+    try { localStorage.setItem('pf-lang', lang); } catch (e) {}
+    this.setState({ lang });
+  }
+  renderVals() {
+    const lang = this.state.lang || this.props.defaultLang || 'uk';
+    const t = I18N[lang] || I18N.uk;
+    const tg = (this.props.telegram ?? '@py_rom').replace('@', '');
+    const email = this.props.email ?? 'bronx1807@gmail.com';
+    const btn = (on) => 'padding:6px 13px;border-radius:999px;border:none;cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:600;transition:all .2s ease;'
+      + (on ? 'background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;' : 'background:transparent;color:#8a8aa0;');
+    return {
+      t,
+      services: t.services, steps: t.steps, reviews: t.reviews,
+      setUk: () => this.setLang('uk'),
+      setEn: () => this.setLang('en'),
+      ukBtnStyle: btn(lang === 'uk'),
+      enBtnStyle: btn(lang === 'en'),
+      showTerminal: this.props.showTerminal ?? true,
+      showForm: this.props.showForm ?? true,
+      telegram: '@' + tg,
+      telegramUrl: 'https://t.me/' + tg,
+      email,
+      mailtoUrl: 'mailto:' + email,
+      submitLabel: this.state.sent ? t.sentLabel : t.submit,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      stack: ['Python 3.14', 'aiogram 3', 'pyTelegramBotAPI', 'FastAPI', 'Django', 'Flask', 'PostgreSQL', 'Redis', 'Celery', 'SQLAlchemy', 'Docker', 'Nginx', 'Playwright', 'Git / CI'],
+    };
+  }
+}
+
+</script>
+</body>
+</html>
