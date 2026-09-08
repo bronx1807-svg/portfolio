@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!token || !chatId) {
+    console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID env var');
     res.status(500).json({ ok: false, error: 'Server not configured' });
     return;
   }
@@ -33,10 +34,15 @@ module.exports = async (req, res) => {
       body: JSON.stringify({ chat_id: chatId, text }),
     });
 
-    if (!tgRes.ok) throw new Error('Telegram API error');
+    if (!tgRes.ok) {
+      const detail = await tgRes.text();
+      console.error('Telegram API error', tgRes.status, detail);
+      throw new Error('Telegram API error');
+    }
 
     res.status(200).json({ ok: true });
   } catch (err) {
+    console.error('contact handler failed', err);
     res.status(502).json({ ok: false, error: 'Failed to deliver' });
   }
 };
