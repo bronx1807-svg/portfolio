@@ -33,7 +33,7 @@
     <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;flex-wrap:wrap">
       <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:15px;letter-spacing:-.01em">
         <span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-size:14px">&lt;/&gt;</span>
-        <span style="color:#e9e9f2">dev.py</span>
+        <span style="color:#e9e9f2">developer</span>
       </div>
       <nav style="display:flex;gap:26px;font-size:14px;color:#9797ae;flex-wrap:wrap">
         <a href="#services" style="color:#9797ae" style-hover="color:#e9e9f2">{{ t.navServices }}</a>
@@ -230,6 +230,7 @@ const I18N = {
     fName: 'Імʼя', fNameP: 'Як до вас звертатися', fContact: 'Telegram або пошта', fTask: 'Задача',
     fTaskP: 'Бот для магазину з оплатою та адмінкою',
     submit: 'Надіслати заявку', sentLabel: 'Заявку надіслано ✓',
+    sendingLabel: 'Надсилаю…', errorLabel: 'Помилка. Спробуйте ще раз',
     consent: 'Натискаючи, ви погоджуєтесь на обробку даних',
     footer: '© 2026 · Python-розробка сайтів і Telegram-ботів',
     services: [
@@ -271,6 +272,7 @@ const I18N = {
     fName: 'Name', fNameP: 'How should I call you', fContact: 'Telegram or email', fTask: 'Task',
     fTaskP: 'A shop bot with payments and an admin panel',
     submit: 'Send request', sentLabel: 'Request sent ✓',
+    sendingLabel: 'Sending…', errorLabel: 'Something went wrong. Try again',
     consent: 'By submitting you agree to data processing',
     footer: '© 2026 · Python development: websites and Telegram bots',
     services: [
@@ -295,7 +297,7 @@ const I18N = {
 };
 
 class Component extends DCLogic {
-  state = { sent: false, lang: null };
+  state = { sent: false, sending: false, error: false, lang: null };
   componentDidMount() {
     let saved = null;
     try { saved = localStorage.getItem('pf-lang'); } catch (e) {}
@@ -325,8 +327,30 @@ class Component extends DCLogic {
       telegramUrl: 'https://t.me/' + tg,
       email,
       mailtoUrl: 'mailto:' + email,
-      submitLabel: this.state.sent ? t.sentLabel : t.submit,
-      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      submitLabel: this.state.sending ? t.sendingLabel : this.state.error ? t.errorLabel : this.state.sent ? t.sentLabel : t.submit,
+      onSubmit: async (e) => {
+        e.preventDefault();
+        if (this.state.sending) return;
+        const form = e.target;
+        const data = new FormData(form);
+        this.setState({ sending: true, error: false });
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: data.get('name') || '',
+              contact: data.get('contact') || '',
+              task: data.get('task') || '',
+            }),
+          });
+          if (!res.ok) throw new Error('request failed');
+          this.setState({ sending: false, sent: true });
+          form.reset();
+        } catch (err) {
+          this.setState({ sending: false, error: true });
+        }
+      },
       stack: ['Python 3.14', 'aiogram 3', 'pyTelegramBotAPI', 'FastAPI', 'Django', 'Flask', 'PostgreSQL', 'Redis', 'Celery', 'SQLAlchemy', 'Docker', 'Nginx', 'Playwright', 'Git / CI'],
     };
   }
